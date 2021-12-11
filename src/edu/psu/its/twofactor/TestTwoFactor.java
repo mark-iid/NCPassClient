@@ -61,8 +61,18 @@ class PSUAuthenBy2ndFactor {
 			anOutputStream.write(protocolBuilder.buildHandShake(anAppName));
 			anOutputStream.flush();
 		} catch (IOException ex) {
+			try {
+				aSocket.close();
+			} catch (Exception e) {
+				// do nothing
+			}
 			return new PSUResponse(-1, ex.getMessage());
 		} catch (Exception ex) {
+			try {
+				aSocket.close();
+			} catch (Exception e) {
+				// do nothing
+			}
 			return new PSUResponse(-1, ex.getMessage());
 		}
 		// Receive handshake response:
@@ -73,8 +83,18 @@ class PSUAuthenBy2ndFactor {
 			Hashtable handshakeTable = protocolBuilder.decodeHandshake(resultbytes);
 			System.out.println(handshakeTable.toString());
 		} catch (IOException ex) {
+			try {
+				aSocket.close();
+			} catch (Exception e) {
+				// do nothing
+			}
 			return new PSUResponse(-1, ex.getMessage());
 		} catch (Exception ex) {
+			try {
+				aSocket.close();
+			} catch (Exception e) {
+				// do nothing
+			}
 			return new PSUResponse(-1, ex.getMessage());
 		}
 		// Send request
@@ -82,8 +102,18 @@ class PSUAuthenBy2ndFactor {
 			anOutputStream.write(protocolBuilder.buildRequest(aUserID, securID));
 			anOutputStream.flush();
 		} catch (IOException ex) {
+			try {
+				aSocket.close();
+			} catch (Exception e) {
+				// do nothing
+			}
 			return new PSUResponse(-1, ex.getMessage());
 		} catch (Exception ex) {
+			try {
+				aSocket.close();
+			} catch (Exception e) {
+				// do nothing
+			}
 			return new PSUResponse(-1, ex.getMessage());
 		}
 		// Receive request response
@@ -94,8 +124,18 @@ class PSUAuthenBy2ndFactor {
 			Hashtable responseTable = protocolBuilder.decodeResponse(resultbytes);
 			System.out.println(responseTable.toString());
 		} catch (IOException ex) {
+			try {
+				aSocket.close();
+			} catch (Exception e) {
+				// do nothing
+			}
 			return new PSUResponse(-1, ex.getMessage());
 		} catch (Exception ex) {
+			try {
+				aSocket.close();
+			} catch (Exception e) {
+				// do nothing
+			}
 			return new PSUResponse(-1, ex.getMessage());
 		}
 		// Close everything:
