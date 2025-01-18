@@ -1,6 +1,9 @@
-# PSUTwoFactor
+[![Java CI with Maven](https://github.com/mark-iid/NCPassClient/actions/workflows/maven.yml/badge.svg?branch=master)](https://github.com/mark-iid/NCPassClient/actions/workflows/maven.yml)
 
-PSUTwoFactor is a simple java libray for validating SecurID tokens using the mainframe based NCPass application.
+
+# NCPassClient
+
+NCPassClient (PSUTwoFactor) is a simple java libray for validating SecurID tokens using the mainframe based NCPass application.
 
 ### Installation
 
