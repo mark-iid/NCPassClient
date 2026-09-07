@@ -3,34 +3,43 @@
 
 # NCPassClient
 
-NCPassClient (PSUTwoFactor) is a simple java libray for validating SecurID tokens using the mainframe based NCPass application.
+NCPassClient is a simple Java library for validating SecurID tokens using the mainframe based NCPass application.
 
 ### Installation
 
-To install PSUTwoFactor, download the latest release from the [releases page](https://github.com/mark-iid/psutwofactor/releases).
+Download the latest release from the [releases page](https://github.com/mark-iid/NCPassClient/releases).
 
 ### Build Instructions
 
-To build PSUTwoFactor from source, follow these steps:
+To build NCPassClient from source, follow these steps:
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/mark-iid/psutwofactor.git
+    git clone https://github.com/mark-iid/NCPassClient.git
     ```
 2. Navigate to the project directory:
     ```sh
-    cd psutwofactor
+    cd NCPassClient
     ```
 3. Compile the project using Maven:
     ```sh
     mvn clean install
     ```
 
-This will generate the `psutwofactor-x.y.z.jar` file in the `target` directory, where `x.y.z` is the version number.
+The Maven coordinates are `edu.psu.its:twofactor`, so this generates `twofactor-1.0-SNAPSHOT.jar` in the `target` directory.
 
 ### Usage
 
-Here is a basic example of how to use PSUTwoFactor:
+`NCPassProtocol` is the public API — it builds and decodes the NCPass handshake and request frames:
+
+```java
+NCPassProtocol protocol = new NCPassProtocol();
+byte[] handshake = protocol.buildHandShake("testapp");
+byte[] request   = protocol.buildRequest("username", "000000");
+Hashtable response = protocol.decodeResponse(responseBytes);
+```
+
+`TestTwoFactor.java` shows the full socket exchange wrapped up as `PSUAuthenBy2ndFactor`:
 
 ```java
 package edu.psu.its.twofactor;
@@ -50,8 +59,12 @@ public class TestTwoFactor {
 }
 ```
 
+Note that `PSUAuthenBy2ndFactor` and `PSUResponse` are package-private, so this example only
+compiles from inside `edu.psu.its.twofactor`. Callers outside that package should use
+`NCPassProtocol` directly, or copy the socket handling from `TestTwoFactor`.
+
 Contributions are welcome! Please open an issue or submit a pull request.
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the Apache License 2.0. See [LICENSE](LICENSE).
