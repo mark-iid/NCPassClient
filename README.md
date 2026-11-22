@@ -30,7 +30,7 @@ The Maven coordinates are `edu.psu.its:twofactor`, so this generates `twofactor-
 
 ### Usage
 
-`NCPassProtocol` is the public API — it builds and decodes the NCPass handshake and request frames:
+`NCPassProtocol` is the public API. It builds and decodes the NCPass handshake and request frames:
 
 ```java
 NCPassProtocol protocol = new NCPassProtocol();
